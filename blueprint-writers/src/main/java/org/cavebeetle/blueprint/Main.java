@@ -28,18 +28,18 @@ public final class Main
         final List<String> terminals = Lists.newArrayList(args).subList(2, args.length);
         final Primes primes = Primes.Maker.make();
         primes.skip(100);
-        for (final String terminal_ : terminals)
+        for (final String terminal : terminals)
         {
             final String entityName;
             final IndefiniteArticle indefiniteArticle;
-            if (terminal_.charAt(0) != '+')
+            if (terminal.charAt(0) != '+')
             {
-                entityName = terminal_;
+                entityName = terminal;
                 indefiniteArticle = IndefiniteArticle.A;
             }
             else
             {
-                entityName = terminal_.substring(1);
+                entityName = terminal.substring(1);
                 indefiniteArticle = IndefiniteArticle.AN;
             }
             javaFileInfos.add(new JavaFileInfo(projectInfo, packageName, JavaFileType.TERMINAL, entityName, indefiniteArticle, primes.next()));
