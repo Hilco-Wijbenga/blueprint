@@ -80,8 +80,8 @@ public final class TerminalWriter
 
     public TypeSpec createTerminalType()
     {
-        final TypeName comparable = ParameterizedTypeName
-                .get(ClassName.get(Comparable.class), ClassName.get(packageName, terminalName));
+        final TypeName terminal = ParameterizedTypeName
+                .get(ClassName.get(Terminal.class), ClassName.get(packageName, terminalName));
         return TypeSpec
                 .classBuilder(terminalName)
                 .addJavadoc("The &lt;$L&gt; element.\n", tag)
@@ -89,8 +89,7 @@ public final class TerminalWriter
                         .builder(Root.class)
                         .build())
                 .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
-                .addSuperinterface(comparable)
-                .addSuperinterface(Show.class)
+                .addSuperinterface(terminal)
                 .addField(createFieldMissing())
                 .addField(createFieldValue())
                 .addMethod(createPublicConstructor())
@@ -164,6 +163,7 @@ public final class TerminalWriter
     {
         return MethodSpec
                 .methodBuilder("value")
+                .addAnnotation(Override.class)
                 .addJavadoc(
                         "Returns this {@code $L}'s value.\n\n@return this {@code $L}'s value.\n",
                         terminalName,

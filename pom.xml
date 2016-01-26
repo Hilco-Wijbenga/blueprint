@@ -15,6 +15,7 @@
     <name>Aggregator</name>
 
     <modules>
+        <module>blueprint-api</module>
         <module>blueprint-writers</module>
         <module>nonterminals</module>
         <module>primes</module>
