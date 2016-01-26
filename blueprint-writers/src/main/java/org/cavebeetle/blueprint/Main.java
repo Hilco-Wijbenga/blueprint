@@ -25,24 +25,34 @@ public final class Main
         final List<JavaFileInfo> javaFileInfos = Lists.newArrayList();
         final ProjectInfo projectInfo = new ProjectInfo(new File(args[0]));
         final String packageName = args[1];
-        final List<String> terminals = Lists.newArrayList(args).subList(2, args.length);
+        final List<String> lines = Lists.newArrayList(args).subList(2, args.length);
         final Primes primes = Primes.Maker.make();
         primes.skip(100);
-        for (final String terminal : terminals)
+        for (final String line : lines)
         {
+            final JavaFileType javaFileType;
+            final String code = line.substring(0, 3);
+            if (code.equals("[T]"))
+            {
+                javaFileType = JavaFileType.TERMINAL;
+            }
+            else
+            {
+                throw new IllegalStateException("Unexpected JavaFileType code: '" + code + "'.");
+            }
             final String entityName;
             final IndefiniteArticle indefiniteArticle;
-            if (terminal.charAt(0) != '+')
+            if (line.charAt(4) != '+')
             {
-                entityName = terminal;
+                entityName = line.substring(4);
                 indefiniteArticle = IndefiniteArticle.A;
             }
             else
             {
-                entityName = terminal.substring(1);
+                entityName = line.substring(5);
                 indefiniteArticle = IndefiniteArticle.AN;
             }
-            javaFileInfos.add(new JavaFileInfo(projectInfo, packageName, JavaFileType.TERMINAL, entityName, indefiniteArticle, primes.next()));
+            javaFileInfos.add(new JavaFileInfo(projectInfo, packageName, javaFileType, entityName, indefiniteArticle, primes.next()));
         }
         int maxLength = 0;
         for (final JavaFileInfo javaFileInfo : javaFileInfos)
