@@ -1,0 +1,23 @@
+"data" Type {tv} = con1  c1t1 c1t2... c1tn
+                 |
+                 | conm cmt1 ... cmtq
+                    "deriving"
+                    ;
+DATA = "data"
+EQUALS = "="
+PIPE = "|"
+DERIVING = "deriving"
+LEFT_PAREN = "("
+CLASS = "Eq" | "Ord" | "Enum" | "Bounded" | "Show" | "Read"
+COMMA = ","
+RIGHT_PAREN = ")"
+SEMICOLON = ";"
+
+typeName = [A-Z]([a-z]+[A-Z])*
+typeVariable = [a-z]+([A-Z][a-z]+)*
+constructor = typeName (typeVariable | typeName)*
+dataDeclaration = DATA typeName typeVariable*
+                  EQUALS constructor
+                  ( PIPE constructor )*
+                  ( DERIVING LEFT_PAREN CLASS ( COMMA CLASS )* RIGHT_PAREN )?
+                  SEMICOLON

@@ -1,0 +1,69 @@
+<project
+    modelVersion='4.0'
+    groupId='org.cavebeetle.maven'
+    artifactId='blueprint-maven-plugin'
+    version='1.0-SNAPSHOT'
+    packaging='maven-plugin'
+    name='Blueprint Maven Plugin'
+    inceptionYear='...'
+    organization='...'
+    url='...'
+>
+    <parent groupId='...' artifactId='...' version='...' relativePath='...'/>
+    <description type="multi-line">...</description>
+    <properties type="list" subtype="property">
+        <property type="property" name='KEY'>VALUE</property>
+    </properties>
+    <compile-dependencies type="list" subtype="compile-dependency">
+        <compile-dependency
+            groupId='GROUP-ID'
+            artifactId='ARTIFACT-ID'
+            version='VERSION'
+            classifier='CLASSIFIER'
+            optional='BOOL'
+            type='jar'
+        >
+            <exclusions type="list" subtype="exclusion">
+                <exclusion groupId='GROUP-ID' artifactId='ARTIFACT-ID'/>
+            </exclusions>
+        </compile-dependency>
+    </compile-dependencies>
+    <system-dependencies type="list" subtype="system-dependency">
+        <compile-dependency
+            groupId='GROUP-ID'
+            artifactId='ARTIFACT-ID'
+            version='VERSION'
+            classifier='CLASSIFIER'
+            optional='BOOL'
+            systemPath='...'
+            type='jar'
+        >
+            <exclusions type="list" subtype="exclusion">
+                <exclusion groupId='GROUP-ID' artifactId='ARTIFACT-ID'/>
+            </exclusions>
+        </system-dependency>
+    </system-dependencies>
+    <build>
+        <plugins type="list" subtype="plugin">
+            <plugin groupId='...' artifactId='...' version='...' inherited='BOOL'>
+                <dependencies>...</dependencies>
+                <configuration type="configuration">
+                    <property ...>...</property>
+                    <property-group name='...'>
+                        ...
+                    </property-group>
+                </configuration>
+                <executions type="list" subtype="execution">
+                    <execution id='...' phase='...' inherited='BOOL'>
+                        <goals type="list" subtype="goal">
+                            <goal name="..."/>
+                        </goals>
+                        <configuration type="configuration">
+                            ...
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

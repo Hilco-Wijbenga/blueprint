@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.cavebeetle.blueprint</groupId>
+    <artifactId>nonterminals</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>Nonterminals</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <!-- Scope 'compile' -->
+        <dependency>
+            <groupId>org.cavebeetle.blueprint</groupId>
+            <artifactId>terminals</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cavebeetle.text</groupId>
+            <artifactId>text</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Scope 'provided' -->
+        <dependency>
+            <groupId>org.cavebeetle.blueprint</groupId>
+            <artifactId>blueprint-writers</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <java classname="org.cavebeetle.blueprint.NonterminalWriter">
+                                    <arg value="${project.build.directory}"/>
+                                    <arg value="org.cavebeetle.blueprint"/>
+                                    <arg value="Project
+                                                    ModelVersion
+                                                    Parent
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Packaging
+                                                    Name
+                                                    Description
+                                                    Url
+                                                    InceptionYear
+                                                    Licenses
+                                                    Organization
+                                                    Developers
+                                                    Contributors
+                                                    IssueManagement
+                                                    CiManagement
+                                                    MailingLists
+                                                    Scm
+                                                    Prerequisites
+                                                    Repositories
+                                                    PluginRepositories
+                                                    DistributionManagement
+                                    "/>
+                                    <arg value="Parent
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    RelativePath
+                                    "/>
+                                    <arg value="Organization
+                                                    Name
+                                                    Url
+                                    "/>
+                                    <arg value="License
+                                                    Name
+                                                    Url
+                                                    Distribution
+                                                    Comments
+                                    "/>
+                                    <arg value="Developer
+                                                    Id
+                                                    Name
+                                                    Email
+                                                    Url
+                                                    Timezone
+                                                    Roles
+                                                    Properties
+                                                    Organization
+                                    "/>
+                                    <arg value="Contributor
+                                                    Name
+                                                    Email
+                                                    Url
+                                                    Timezone
+                                                    Roles
+                                                    Properties
+                                                    Organization
+                                    "/>
+                                    <arg value="IssueManagement
+                                                    CiSystem
+                                                    Url
+                                    "/>
+                                    <arg value="CiManagement
+                                                    CiSystem
+                                                    Url
+                                                    Notifiers
+                                    "/>
+                                    <arg value="Notifier
+                                                    Address
+                                                    Configuration
+                                                    SendOnError
+                                                    SendOnFailure
+                                                    SendOnSuccess
+                                                    SendOnWarning
+                                                    Type
+                                    "/>
+                                    <arg value="MailingList
+                                                    Archive
+                                                    Name
+                                                    OtherArchives
+                                                    Post
+                                                    Subscribe
+                                                    Unsubscribe
+                                    "/>
+                                    <arg value="Scm
+                                                    Connection
+                                                    DeveloperConnection
+                                                    Tag
+                                                    Url
+                                    "/>
+                                    <arg value="Prerequisites
+                                                    Maven
+                                    "/>
+                                    <arg value="Repository
+                                                    Id
+                                                    Url
+                                                    Layout
+                                                    Name
+                                                    Releases
+                                                    Snapshots
+                                    "/>
+                                    <arg value="PluginRepository
+                                                    Id
+                                                    Url
+                                                    Layout
+                                                    Name
+                                                    Releases
+                                                    Snapshots
+                                    "/>
+                                    <arg value="Releases
+                                                    ChecksumPolicy
+                                                    UpdatePolicy
+                                                    Enabled
+                                    "/>
+                                    <arg value="Snapshots
+                                                    ChecksumPolicy
+                                                    UpdatePolicy
+                                                    Enabled
+                                    "/>
+                                    <arg value="Relocation
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Message
+                                    "/>
+                                    <arg value="UploadRepository
+                                                    Id
+                                                    Layout
+                                                    Name
+                                                    UniqueVersion
+                                                    Url
+                                    "/>
+                                    <arg value="SnapshotUploadRepository
+                                                    Id
+                                                    Layout
+                                                    Name
+                                                    UniqueVersion
+                                                    Url
+                                    "/>
+                                    <arg value="Site
+                                                    Id
+                                                    Name
+                                                    Url
+                                    "/>
+                                    <arg value="DistributionManagement
+                                                    DownloadUrl
+                                                    Relocation
+                                                    UploadRepository
+                                                    SnapshotUploadRepository
+                                                    Site
+                                                    Status
+                                    "/>
+                                    <arg value="Dependencies
+                                                    ImportDependencies
+                                                    CompileDependencies
+                                                    ProvidedDependencies
+                                                    RuntimeDependencies
+                                                    TestDependencies
+                                                    SystemDependencies
+                                    "/>
+                                    <arg value="ImportDependency
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Classifier
+                                                    Optional
+                                                    Exclusions
+                                    "/>
+                                    <arg value="CompileDependency
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Type
+                                                    Classifier
+                                                    Optional
+                                                    Exclusions
+                                    "/>
+                                    <arg value="ProvidedDependency
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Type
+                                                    Classifier
+                                                    Optional
+                                                    Exclusions
+                                    "/>
+                                    <arg value="RuntimeDependency
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Type
+                                                    Classifier
+                                                    Optional
+                                                    Exclusions
+                                    "/>
+                                    <arg value="SystemDependency
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Type
+                                                    Classifier
+                                                    Optional
+                                                    SystemPath
+                                                    Exclusions
+                                    "/>
+                                    <arg value="TestDependency
+                                                    GroupId
+                                                    ArtifactId
+                                                    Version
+                                                    Type
+                                                    Classifier
+                                                    Optional
+                                                    Exclusions
+                                    "/>
+                                    <arg value="Exclusion
+                                                    GroupId
+                                                    ArtifactId
+                                    "/>
+                                </java>
+                                <java classname="org.cavebeetle.blueprint.NonterminalListWriter">
+                                    <arg value="${project.build.directory}"/>
+                                    <arg value="org.cavebeetle.blueprint"/>
+                                    <arg value="CompileDependencies : CompileDependency"/>
+                                    <arg value="Contributors        : Contributor"/>
+                                    <arg value="Developers          : Developer"/>
+                                    <arg value="Exclusions          : Exclusion"/>
+                                    <arg value="ImportDependencies  : ImportDependency"/>
+                                    <arg value="Licenses            : License"/>
+                                    <arg value="MailingLists        : MailingList"/>
+                                    <arg value="Notifiers           : Notifier"/>
+                                    <arg value="OtherArchives       : OtherArchive"/>
+                                    <arg value="PluginRepositories  : PluginRepository"/>
+                                    <arg value="Properties          : Property"/>
+                                    <arg value="ProvidedDependencies: ProvidedDependency"/>
+                                    <arg value="Repositories        : Repository"/>
+                                    <arg value="Roles               : Role"/>
+                                    <arg value="RuntimeDependencies : RuntimeDependency"/>
+                                    <arg value="SystemDependencies  : SystemDependency"/>
+                                    <arg value="TestDependencies    : TestDependency"/>
+                                </java>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.cavebeetle.blueprint</groupId>
+                        <artifactId>blueprint-writers</artifactId>
+                        <version>1.0-SNAPSHOT</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
