@@ -1,15 +1,10 @@
 package org.cavebeetle.blueprint;
 
-import java.io.File;
-import java.util.List;
 import javax.lang.model.element.Modifier;
-import org.cavebeetle.primes.Primes;
-import org.cavebeetle.text.Show;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
@@ -23,59 +18,36 @@ import com.squareup.javapoet.TypeSpec;
 
 public final class TerminalWriter
 {
-    public static final void main(final String[] args) throws Exception
-    {
-        final File generatedSourcesDir = new File(args[0]);
-        final String packageName = args[1];
-        final List<String> terminals = Lists.newArrayList(args).subList(2, args.length);
-        final Primes primes = Primes.Maker.make();
-        primes.skip(100);
-        int maxLength = 0;
-        for (final String terminal : terminals)
-        {
-            if (terminal.length() > maxLength)
-            {
-                maxLength = terminal.length();
-            }
-        }
-        final String mask = String.format("Generating terminal %%-%ds ... ", Integer.valueOf(maxLength + 2));
-        for (final String terminal : terminals)
-        {
-            System.out.print(String.format(mask, "'" + terminal + "'"));
-            final TerminalWriter terminalWriter = new TerminalWriter(primes, packageName, terminal);
-            final JavaFile javaFile = terminalWriter.create();
-            javaFile.writeTo(generatedSourcesDir);
-            System.out.println("done");
-        }
-    }
-
-    private final Primes primes;
+    private final JavaFileInfo javaFileInfo;
+    private final Integer prime;
     private final String packageName;
     private final String terminalName;
     private final String tag;
     private final String simpleName;
     private final TypeName terminalTypeName;
 
-    public TerminalWriter(final Primes primes, final String packageName, final String terminalName)
+    public TerminalWriter(final JavaFileInfo javaFileInfo)
     {
-        Preconditions.checkNotNull(primes, "Missing 'primes'.");
-        Preconditions.checkArgument(packageName != null && !packageName.isEmpty(), "Missing 'packageName'.");
-        Preconditions.checkArgument(terminalName != null && !terminalName.isEmpty(), "Missing 'terminalName'.");
-        this.primes = primes;
-        this.packageName = packageName;
-        this.terminalName = terminalName;
+        Preconditions.checkNotNull(javaFileInfo, "Missing 'javaFileInfo'.");
+        this.javaFileInfo = javaFileInfo;
+        packageName = javaFileInfo.packageName();
+        terminalName = javaFileInfo.entityName();
+        prime = javaFileInfo.prime();
         tag = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, terminalName);
         simpleName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, terminalName).replace('_', ' ');
         terminalTypeName = ClassName.get(packageName, terminalName);
     }
 
-    public JavaFile create()
+    public void create()
     {
-        return JavaFile
+        final JavaFile javaFile = JavaFile
                 .builder(packageName, createTerminalType())
                 .indent("    ")
                 .skipJavaLangImports(true)
                 .build();
+        Misc.writeJavaFile(javaFile, javaFileInfo.projectInfo().srcMainJavaDir());
+        final TerminalTestWriter terminalTestWriter = new TerminalTestWriter(javaFileInfo);
+        terminalTestWriter.create();
     }
 
     public TypeSpec createTerminalType()
@@ -202,7 +174,7 @@ public final class TerminalWriter
                 .returns(int.class)
                 .addCode(CodeBlock
                         .builder()
-                        .addStatement("final int prime = $L", primes.next())
+                        .addStatement("final int prime = $L", prime)
                         .addStatement("return prime + value.hashCode()")
                         .build())
                 .build();

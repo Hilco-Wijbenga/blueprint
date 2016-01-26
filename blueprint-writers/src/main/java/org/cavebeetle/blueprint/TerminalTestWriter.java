@@ -3,8 +3,8 @@ package org.cavebeetle.blueprint;
 import java.lang.reflect.Method;
 import java.util.List;
 import javax.lang.model.element.Modifier;
-import org.cavebeetle.primes.Primes;
 import com.google.common.base.CaseFormat;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.CodeBlock;
@@ -16,36 +16,32 @@ import com.squareup.javapoet.TypeSpec;
 
 public final class TerminalTestWriter
 {
-    private final Primes primes;
+    private final ProjectInfo projectInfo;
     private final String packageName;
     private final String terminalName;
     private final IndefiniteArticle indefiniteArticle;
     private final String tag;
-    private final String simpleName;
     private final TypeName terminalTypeName;
 
-    public TerminalTestWriter(
-            final Primes primes,
-            final String packageName,
-            final String terminalName,
-            final IndefiniteArticle indefiniteArticle)
+    public TerminalTestWriter(final JavaFileInfo javaFileInfo)
     {
-        this.primes = primes;
-        this.packageName = packageName;
-        this.terminalName = terminalName;
-        this.indefiniteArticle = indefiniteArticle;
+        Preconditions.checkNotNull(javaFileInfo, "Missing 'javaFileInfo'.");
+        projectInfo = javaFileInfo.projectInfo();
+        packageName = javaFileInfo.packageName();
+        terminalName = javaFileInfo.entityName();
+        indefiniteArticle = javaFileInfo.indefiniteArticle();
         tag = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, terminalName);
-        simpleName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, terminalName).replace('_', ' ');
         terminalTypeName = ClassName.get(packageName, terminalName);
     }
 
-    public JavaFile create()
+    public void create()
     {
-        return JavaFile
+        final JavaFile javaFile = JavaFile
                 .builder(packageName, createTerminalTestType())
                 .indent("    ")
                 .skipJavaLangImports(true)
                 .build();
+        Misc.writeJavaFile(javaFile, projectInfo.srcTestJavaDir());
     }
 
     public TypeSpec createTerminalTestType()
