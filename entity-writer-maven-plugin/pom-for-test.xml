@@ -22,46 +22,21 @@
 
     <build>
 
-        <pluginManagement>
-
-            <plugins>
-
-                <plugin>
-                    <groupId>org.cavebeetle.maven</groupId>
-                    <artifactId>entity-writer-maven-plugin</artifactId>
-                    <version>0.0.1-SNAPSHOT</version>
-                </plugin>
-
-            </plugins>
-
-        </pluginManagement>
-
         <plugins>
 
             <plugin>
                 <groupId>org.cavebeetle.maven</groupId>
                 <artifactId>entity-writer-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <configuration>
+                    <packageName>org.cavebeetle</packageName>
                     <entities>
                         <entity>
-                            <name>EntityA</name>
+                            <name>Address</name>
                             <fields>
                                 <field>
-                                    <name>Field A One</name>
-                                </field>
-                                <field>
-                                    <name>Field A Two</name>
-                                </field>
-                            </fields>
-                        </entity>
-                        <entity>
-                            <name>EntityB</name>
-                            <fields>
-                                <field>
-                                    <name>Field B One</name>
-                                </field>
-                                <field>
-                                    <name>Field B Two</name>
+                                    <type>java.lang.String</type>
+                                    <name>value</name>
                                 </field>
                             </fields>
                         </entity>

@@ -13,12 +13,18 @@ public final class Entities
 {
     private final File generatedSourcesMainJavaDir;
     private final File generatedSourcesTestJavaDir;
+    private final String packageName;
     private final List<Entity> entities;
 
-    public Entities(final File generatedSourcesMainJavaDir, final File generatedSourcesTestJavaDir, final List<EntityDto> entityDtos)
+    public Entities(
+            final File generatedSourcesMainJavaDir,
+            final File generatedSourcesTestJavaDir,
+            final String packageName,
+            final List<EntityDto> entityDtos)
     {
         this.generatedSourcesMainJavaDir = generatedSourcesMainJavaDir;
         this.generatedSourcesTestJavaDir = generatedSourcesTestJavaDir;
+        this.packageName = packageName;
         final List<Entity> entities = Lists.newArrayListWithCapacity(entityDtos.size());
         for (final EntityDto entity_ : entityDtos)
         {
@@ -36,6 +42,11 @@ public final class Entities
     public File generatedSourcesTestJavaDir()
     {
         return generatedSourcesTestJavaDir;
+    }
+
+    public String packageName()
+    {
+        return packageName;
     }
 
     @Override

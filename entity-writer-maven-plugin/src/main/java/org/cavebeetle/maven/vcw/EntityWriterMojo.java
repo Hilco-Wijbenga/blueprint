@@ -25,12 +25,14 @@ public class EntityWriterMojo
         property = "vcw.gen-src.test.directory")
     public File generatedSourcesTestJavaDir;
     @Parameter
+    public String packageName = "org.example";
+    @Parameter
     public List<EntityDto> entities = Lists.newArrayList();
 
     @Override
     public void execute()
             throws MojoExecutionException
     {
-        new EntityWriter(new Entities(generatedSourcesMainJavaDir, generatedSourcesTestJavaDir, entities)).execute();
+        new EntityWriter(new Entities(generatedSourcesMainJavaDir, generatedSourcesTestJavaDir, packageName, entities)).execute();
     }
 }
