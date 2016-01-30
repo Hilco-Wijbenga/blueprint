@@ -15,7 +15,7 @@
     <name>Aggregator</name>
 
     <modules>
-        <module>entity-writer-maven-plugin</module>
+        <!--module>entity-writer-maven-plugin</module-->
         <module>blueprint-api</module>
         <module>blueprint-writers</module>
         <module>nonterminals</module>
