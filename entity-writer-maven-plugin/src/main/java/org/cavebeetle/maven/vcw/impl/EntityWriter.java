@@ -4,7 +4,6 @@ import java.util.List;
 import javax.lang.model.element.Modifier;
 import org.cavebeetle.maven.vcw.Misc;
 import com.google.common.collect.Lists;
-import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.TypeSpec;
@@ -39,11 +38,15 @@ public final class EntityWriter
                 .addFields(createFields(entity))
                 .build();
     }
-    
-    public List<FieldSpec> createFields(Entity entity){
-        List<FieldSpec> result = Lists.newArrayList();
-        for (Field field : entity) {
-            result.add(FieldSpec.builder(ClassName.get(), field.name(), null))
+
+    public List<FieldSpec> createFields(final Entity entity)
+    {
+        final List<FieldSpec> result = Lists.newArrayList();
+        for (final Field field : entity)
+        {
+            result.add(FieldSpec
+                    .builder(field.type(), field.name(), Modifier.PRIVATE, Modifier.FINAL)
+                    .build());
         }
         return result;
     }

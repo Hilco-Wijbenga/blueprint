@@ -1,19 +1,20 @@
 package org.cavebeetle.maven.vcw.impl;
 
 import org.cavebeetle.maven.vcw.FieldDto;
+import com.squareup.javapoet.ClassName;
 
 public final class Field
 {
-    private final String type;
+    private final ClassName type;
     private final String name;
 
     public Field(final FieldDto field)
     {
-        type = field.type;
+        type = ClassName.get(field.type.packageName, field.type.simpleName, field.type.simpleNames);
         name = field.name;
     }
 
-    public String type()
+    public ClassName type()
     {
         return type;
     }

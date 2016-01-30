@@ -17,6 +17,8 @@
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
 
     </properties>
 
@@ -35,8 +37,21 @@
                             <name>Address</name>
                             <fields>
                                 <field>
-                                    <type>java.lang.String</type>
+                                    <type>
+                                        <packageName>java.lang</packageName>
+                                        <simpleName>String</simpleName>
+                                    </type>java.util.Map.Entry
                                     <name>value</name>
+                                </field>
+                                <field>
+                                    <type>
+                                        <packageName>java.util</packageName>
+                                        <simpleName>Map</simpleName>
+                                        <simpleNames>
+                                            <simpleName>Entry</simpleName>
+                                        </simpleNames>
+                                    </type>
+                                    <name>value2</name>
                                 </field>
                             </fields>
                         </entity>
